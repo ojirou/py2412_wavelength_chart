@@ -1,0 +1,20 @@
+import matplotlib.pyplot as plt
+import numpy as np
+a0=np.loadtxt('data_chart\\241230wavelength_chart.csv', skiprows=1)
+fig, ax=plt.subplots(figsize=(5.5, 3.5))
+ax.plot(a0[:,0]/1e6, a0[:,1], color="black", lw=1, ls='-', marker='o', markersize=0, label='εr=1')
+ax.plot(a0[:,0]/1e6, a0[:,2], color="red", lw=1, ls='-', marker='o', markersize=0, label='εr=2.26')
+ax.plot(a0[:,0]/1e6, a0[:,3], color="green", lw=1, ls='-', marker='o', markersize=0, label='εr=4.7')
+ax.plot(a0[:,0]/1e6, a0[:,4], color="blue", lw=1, ls='-', marker='o', markersize=0, label='εr=10')
+ax.set_xscale('log')
+ax.set_yscale('log')
+ax.set_xlim([10, 100000])
+ax.set_ylim([1, 10000])
+ax.set_title('wavelength chart')
+ax.set_xlabel('Frequency [MHz]', fontsize=11)
+ax.set_ylabel('Effective wavelength λeff [cm]', fontsize=11)
+ax.legend(loc='upper right')
+ax.grid(ls=':')
+PdfFile='data_chart\\241230wavelength_chart.pdf'
+fig.savefig(PdfFile)
+subprocess.Popen(['start', PdfFile], shell=True)
